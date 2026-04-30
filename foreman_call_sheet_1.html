@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Foreman's Call Sheet — Module 1, Session 1</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #1a1d21;
+    --bg-card: #232730;
+    --bg-elevated: #2c313c;
+    --ink: #e8e6e1;
+    --ink-dim: #9ba1aa;
+    --ink-faint: #6b7280;
+    --rule: #3a3f4a;
+    --rule-strong: #4a5160;
+    --safety: #ff6b00;
+    --safety-yellow: #ffc107;
+    --hazard: #e63946;
+    --steel: #5b8db8;
+    --go: #4ade80;
+    --paper: #f4f1ea;
+    --paper-dark: #d8d2c4;
+    --ink-paper: #1a1d21;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  body {
+    background-image:
+      linear-gradient(var(--rule) 1px, transparent 1px),
+      linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: 0 0;
+    background-attachment: fixed;
+    background-color: var(--bg);
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at top, rgba(255,107,0,0.04), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HEADER */
+  .header {
+    border-top: 4px solid var(--safety);
+    border-bottom: 1px solid var(--rule-strong);
+    background: linear-gradient(180deg, rgba(255,107,0,0.06), transparent);
+    padding: 28px 32px 24px;
+    margin-bottom: 32px;
+    position: relative;
+  }
+
+  .header::before {
+    content: 'SURE STEEL — FOREMAN COHORT';
+    position: absolute;
+    top: 8px;
+    right: 32px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--safety);
+    font-weight: 600;
+  }
+
+  .module-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--ink-dim);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .module-tag .num {
+    color: var(--safety);
+    font-weight: 600;
+  }
+
+  h1.title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: clamp(36px, 5vw, 56px);
+    letter-spacing: -0.01em;
+    line-height: 1.0;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  h1.title .accent {
+    color: var(--safety);
+  }
+
+  .subtitle {
+    color: var(--ink-dim);
+    font-size: 16px;
+    max-width: 720px;
+    line-height: 1.55;
+  }
+
+  .meta-row {
+    display: flex;
+    gap: 24px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+
+  .meta-row span strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* SECTION HEADERS */
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin: 48px 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .section-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--safety);
+    line-height: 0.9;
+  }
+
+  .section-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .section-sub {
+    margin-left: auto;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+
+  /* OPENING / FRAME */
+  .frame {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--safety);
+    padding: 24px 28px;
+    margin-bottom: 24px;
+  }
+
+  .frame .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--safety);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .frame h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .frame p {
+    color: var(--ink-dim);
+    margin-bottom: 10px;
+  }
+
+  .frame p:last-child { margin-bottom: 0; }
+
+  .frame strong { color: var(--ink); font-weight: 600; }
+
+  /* INSTRUCTIONS / WORKFLOW BAND */
+  .workflow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-bottom: 32px;
+    border: 1px solid var(--rule);
+    background: var(--bg-card);
+  }
+
+  .step {
+    padding: 18px 16px;
+    border-right: 1px solid var(--rule);
+    position: relative;
+  }
+  .step:last-child { border-right: none; }
+
+  .step-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--safety);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .step-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .step-desc {
+    font-size: 12px;
+    color: var(--ink-dim);
+    line-height: 1.4;
+  }
+
+  /* SCENARIO CARD — looks like a job briefing */
+  .scenario {
+    background: var(--paper);
+    color: var(--ink-paper);
+    border: 1px solid var(--paper-dark);
+    margin-bottom: 24px;
+    position: relative;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+
+  .scenario::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: repeating-linear-gradient(
+      45deg,
+      var(--safety) 0 12px,
+      #1a1d21 12px 24px
+    );
+  }
+
+  .scenario-head {
+    padding: 28px 32px 20px;
+    border-bottom: 2px solid var(--paper-dark);
+    background: linear-gradient(180deg, #ebe7dd, var(--paper));
+  }
+
+  .scenario-stamp {
+    display: inline-block;
+    background: var(--ink-paper);
+    color: var(--safety-yellow);
+    padding: 4px 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .scenario-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  .scenario-meta {
+    display: flex;
+    gap: 24px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: #4a5160;
+    text-transform: uppercase;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--paper-dark);
+    flex-wrap: wrap;
+  }
+
+  .scenario-meta strong { color: var(--ink-paper); font-weight: 700; }
+
+  .scenario-body {
+    padding: 28px 32px;
+  }
+
+  .scenario-body .lead {
+    font-size: 15px;
+    line-height: 1.65;
+    margin-bottom: 16px;
+  }
+
+  .scenario-body .lead.first {
+    font-size: 17px;
+    font-weight: 500;
+  }
+
+  .scenario-body strong {
+    background: var(--safety-yellow);
+    padding: 1px 4px;
+    color: var(--ink-paper);
+    font-weight: 600;
+  }
+
+  .scenario-body em.quote {
+    background: #fff;
+    border-left: 3px solid var(--hazard);
+    padding: 12px 16px;
+    display: block;
+    margin: 16px 0;
+    font-style: italic;
+    font-size: 15px;
+    color: #2a2d33;
+  }
+
+  .what-you-know {
+    background: #fff;
+    border: 1px dashed var(--paper-dark);
+    padding: 18px 22px;
+    margin-top: 20px;
+  }
+
+  .what-you-know h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--hazard);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .what-you-know ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .what-you-know li {
+    padding: 6px 0 6px 22px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .what-you-know li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--hazard);
+    font-weight: 700;
+  }
+
+  /* DECISION BLOCK */
+  .decisions {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    margin-bottom: 24px;
+    padding: 0;
+  }
+
+  .decisions-head {
+    background: var(--bg-elevated);
+    padding: 18px 28px;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .decisions-head .icon {
+    width: 36px;
+    height: 36px;
+    background: var(--safety);
+    color: var(--ink-paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .decisions-head h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-bottom: 2px;
+  }
+
+  .decisions-head .sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .decision-list {
+    padding: 8px 0;
+  }
+
+  .decision-item {
+    padding: 18px 28px;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    gap: 18px;
+  }
+
+  .decision-item:last-child { border-bottom: none; }
+
+  .decision-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--safety);
+    line-height: 1;
+    min-width: 36px;
+    flex-shrink: 0;
+  }
+
+  .decision-content {
+    flex: 1;
+  }
+
+  .decision-q {
+    font-family: 'Oswald', sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+
+  .decision-hint {
+    color: var(--ink-dim);
+    font-size: 13px;
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  /* STEPS PROCESS */
+  .process {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    padding: 24px 28px;
+    margin-bottom: 24px;
+  }
+
+  .process h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--steel);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--rule);
+  }
+
+  .process-cell {
+    padding: 16px 18px;
+    border-right: 1px solid var(--rule);
+    background: var(--bg-elevated);
+  }
+  .process-cell:last-child { border-right: none; }
+
+  .process-cell .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--safety);
+    letter-spacing: 0.18em;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .process-cell .what {
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .process-cell .time {
+    font-size: 12px;
+    color: var(--ink-dim);
+  }
+
+  /* SUBMIT CTA */
+  .submit-cta {
+    background: var(--bg-card);
+    border: 2px solid var(--safety);
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    position: relative;
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent 0 20px,
+      rgba(255,107,0,0.03) 20px 40px
+    );
+  }
+
+  .submit-cta .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--safety);
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .submit-cta h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 24px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .submit-cta p {
+    color: var(--ink-dim);
+    margin-bottom: 18px;
+    font-size: 14px;
+  }
+
+  .btn-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--safety);
+    color: var(--ink-paper);
+    padding: 14px 28px;
+    border: none;
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    border: 2px solid var(--safety);
+  }
+
+  .btn-submit:hover {
+    background: var(--ink-paper);
+    color: var(--safety);
+  }
+
+  .btn-submit::after {
+    content: '→';
+    font-size: 20px;
+  }
+
+  /* IFRAME EMBED */
+  .form-embed {
+    background: #fff;
+    border: 1px solid var(--rule);
+    margin-top: 8px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .form-embed iframe {
+    width: 100%;
+    height: 800px;
+    display: block;
+    background: #fff;
+  }
+
+  .embed-fallback {
+    font-size: 13px;
+    color: var(--ink-dim);
+    margin-bottom: 0 !important;
+    margin-top: 4px !important;
+    text-align: right;
+  }
+
+  .embed-fallback a {
+    color: var(--safety);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .embed-fallback a:hover {
+    text-decoration: underline;
+  }
+
+  /* DIVIDER */
+  .divider {
+    margin: 56px 0;
+    text-align: center;
+    position: relative;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .divider span {
+    background: var(--bg);
+    padding: 0 20px;
+    position: relative;
+    top: -10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  /* CLOSING */
+  .closing {
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-elevated));
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--safety);
+    padding: 40px 36px;
+    margin-top: 32px;
+    text-align: center;
+  }
+
+  .closing .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--safety);
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .closing .principle {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 600;
+    line-height: 1.25;
+    text-transform: uppercase;
+    max-width: 760px;
+    margin: 0 auto;
+    letter-spacing: -0.005em;
+  }
+
+  .closing .principle .hl {
+    color: var(--safety);
+  }
+
+  /* FOOTER */
+  .foot {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .workflow { grid-template-columns: repeat(2, 1fr); }
+    .step:nth-child(2) { border-right: none; }
+    .step:nth-child(1), .step:nth-child(2) { border-bottom: 1px solid var(--rule); }
+    .process-grid { grid-template-columns: 1fr; }
+    .process-cell { border-right: none; border-bottom: 1px solid var(--rule); }
+    .process-cell:last-child { border-bottom: none; }
+    .header::before { display: none; }
+    .scenario-title { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="module-tag"><span class="num">MODULE 01 / SESSION 01</span> &nbsp;·&nbsp; SAFETY, HEALTH & ENVIRONMENT</div>
+    <h1 class="title">The Foreman's<br><span class="accent">Call Sheet</span></h1>
+    <p class="subtitle">
+      Two scenarios. Both about <strong>other crews</strong>. You'll work through them in your group of three —
+      first on your own, then together. There are no perfect answers. Only the call <em>you</em> would make.
+    </p>
+    <div class="meta-row">
+      <span><strong>RUN TIME</strong> 30–35 MIN</span>
+      <span><strong>GROUP SIZE</strong> 3</span>
+      <span><strong>MATERIALS</strong> 1 LAPTOP / GROUP</span>
+      <span><strong>SUBMISSION</strong> MICROSOFT FORMS</span>
+    </div>
+  </header>
+
+  <!-- INTRO FRAME -->
+  <div class="frame">
+    <div class="label">Before you start</div>
+    <h3>Why we're doing this</h3>
+    <p>
+      Sure Steel foremen know how to run their own crew. The harder call is what to do when
+      <strong>somebody else's crew</strong> is doing something unsafe — and nobody's stopping them.
+      That's the gap this session is built around.
+    </p>
+    <p>
+      You've all read about Steve Halverson going to that wife's door. You've read Boyd Worsham finding the
+      laborer 35 feet below the skylight. You know what's at stake. The question isn't <em>do you care.</em>
+      The question is: <strong>when it's not your guy, do you still call it?</strong>
+    </p>
+  </div>
+
+  <!-- WORKFLOW -->
+  <div class="workflow">
+    <div class="step">
+      <div class="step-num">STEP 01</div>
+      <div class="step-name">Read</div>
+      <div class="step-desc">Read the scenario together. Don't rush. Look for what's said and what's not.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">STEP 02</div>
+      <div class="step-name">Decide solo</div>
+      <div class="step-desc">Each of you answers the four decision points on your own first. No talking.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">STEP 03</div>
+      <div class="step-name">Argue it out</div>
+      <div class="step-desc">Compare your answers. Where do you agree? Where do you split? Who has the strongest case?</div>
+    </div>
+    <div class="step">
+      <div class="step-num">STEP 04</div>
+      <div class="step-name">Submit one answer</div>
+      <div class="step-desc">As a group, agree on one consensus call for each decision. Submit it through the form.</div>
+    </div>
+  </div>
+
+  <!-- SECTION: SCENARIO 1 -->
+  <div class="section-head">
+    <div class="section-num">01</div>
+    <div class="section-title">Scenario One</div>
+    <div class="section-sub">10 minutes · 4 decision points</div>
+  </div>
+
+  <article class="scenario">
+    <div class="scenario-head">
+      <div class="scenario-stamp">Briefing · Job #4218</div>
+      <h1 class="scenario-title">The Decking Crew Next Door</h1>
+      <div class="scenario-meta">
+        <span><strong>Project</strong> 6-story office, downtown</span>
+        <span><strong>Your role</strong> Raising gang foreman</span>
+        <span><strong>Time</strong> 10:42 AM, Tuesday</span>
+        <span><strong>Weather</strong> 81°F, light wind</span>
+      </div>
+    </div>
+
+    <div class="scenario-body">
+      <p class="lead first">
+        You're running the raising gang on the 5th floor of a 6-story office building downtown. Steel
+        is going up clean — your crew is on schedule and safe. The decking sub on the floor below
+        you is a different company, working under the same GC.
+      </p>
+
+      <p class="lead">
+        Twenty minutes ago, your connector Diego came down off the iron and pulled you aside.
+        He says the decking foreman just told his guys to <strong>stop tying off</strong> because
+        they're "only here another two hours and the harnesses are slowing us down." Diego watched
+        two of their guys walk the perimeter — about <strong>22 feet up</strong> — with no fall
+        protection. One of them was carrying a sheet of decking by himself.
+      </p>
+
+      <p class="lead">
+        You walked over to the edge yourself and confirmed it. The GC superintendent is on the
+        ground floor and hasn't said anything. Their guys are still working unprotected as
+        you're standing there.
+      </p>
+
+      <em class="quote">
+        "I won't tell if you won't tell. We're almost done."
+        <br><span style="font-size: 12px; font-style: normal; color: var(--ink-faint);">— What the decking foreman reportedly said to his crew.</span>
+      </em>
+
+      <div class="what-you-know">
+        <h4>What you know</h4>
+        <ul>
+          <li>OSHA requires fall protection at 6 feet in construction. They're at 22 feet.</li>
+          <li>The decking crew works for a different sub. You don't have authority over their foreman.</li>
+          <li>Your crew is on schedule. Stopping anything costs <em>your</em> production.</li>
+          <li>The GC has a published Stop Work policy that says "any worker, any company, any time."</li>
+          <li>You've never met the decking foreman before today.</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <!-- DECISION POINTS -->
+  <div class="decisions">
+    <div class="decisions-head">
+      <div class="icon">!</div>
+      <div>
+        <h3>Your call</h3>
+        <div class="sub">Each foreman answers these on their own. Then compare in your group.</div>
+      </div>
+    </div>
+    <div class="decision-list">
+      <div class="decision-item">
+        <div class="decision-num">1</div>
+        <div class="decision-content">
+          <div class="decision-q">Is this your problem? Why or why not?</div>
+          <div class="decision-hint">
+            They're not your crew. They're not your company. The GC hasn't asked you to do anything.
+            Walk through your reasoning out loud.
+          </div>
+        </div>
+      </div>
+
+      <div class="decision-item">
+        <div class="decision-num">2</div>
+        <div class="decision-content">
+          <div class="decision-q">Who do you talk to first — and why that person?</div>
+          <div class="decision-hint">
+            Your super. The GC super. The decking foreman. The decking crew directly. There's a right
+            order — and the wrong first call can blow up your standing on the job for the rest of the project.
+          </div>
+        </div>
+      </div>
+
+      <div class="decision-item">
+        <div class="decision-num">3</div>
+        <div class="decision-content">
+          <div class="decision-q">What exact words do you use?</div>
+          <div class="decision-hint">
+            Don't write a paragraph. Write the actual sentence. The thing you'd say if you were standing
+            in front of him right now. (Hint: re-read what the superintendent said to the CEO about boots.)
+          </div>
+        </div>
+      </div>
+
+      <div class="decision-item">
+        <div class="decision-num">4</div>
+        <div class="decision-content">
+          <div class="decision-q">If nothing changes in 10 minutes, what do you do?</div>
+          <div class="decision-hint">
+            Now you've talked to someone and they brushed you off. The guys are still up there. Your
+            next move says everything about what kind of foreman you are.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW TO WORK IT -->
+  <div class="process">
+    <h4>How to work scenario one</h4>
+    <div class="process-grid">
+      <div class="process-cell">
+        <div class="label">Phase 1 · Solo</div>
+        <div class="what">Write your call</div>
+        <div class="time">3 minutes · no talking</div>
+      </div>
+      <div class="process-cell">
+        <div class="label">Phase 2 · Group</div>
+        <div class="what">Argue + agree</div>
+        <div class="time">5 minutes · one voice each</div>
+      </div>
+      <div class="process-cell">
+        <div class="label">Phase 3 · Submit</div>
+        <div class="what">One answer per group</div>
+        <div class="time">2 minutes</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBMIT 1 — IFRAME EMBED -->
+  <div class="submit-cta">
+    <div class="label">Form Submission · Scenario 1</div>
+    <h3>Submit your group's call before moving on</h3>
+    <p>One submission per group of three. Use the same group name on both scenarios.</p>
+    <div class="form-embed">
+      <!-- ============================================================== -->
+      <!-- PASTE YOUR MICROSOFT FORMS EMBED URL IN THE src="" BELOW        -->
+      <!-- ============================================================== -->
+      <iframe
+        src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=VqDS_LW1kkmjfyLfsKnmzfDUR4PIkO5DqxZrwTk6xSJUMFROSDJBTThFVVFQTFQxWkhZNVpCWFBIMC4u&embed=true"
+        frameborder="0"
+        marginwidth="0"
+        marginheight="0"
+        style="border: none; max-width: 100%; max-height: 100vh"
+        allowfullscreen
+        webkitallowfullscreen
+        mozallowfullscreen
+        msallowfullscreen>
+      </iframe>
+    </div>
+    <p class="embed-fallback">
+      Form not loading? <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=VqDS_LW1kkmjfyLfsKnmzfDUR4PIkO5DqxZrwTk6xSJUMFROSDJBTThFVVFQTFQxWkhZNVpCWFBIMC4u" target="_blank" rel="noopener">Open it in a new tab →</a>
+    </p>
+  </div>
+
+  <!-- DIVIDER -->
+  <div class="divider"><span>End of scenario one</span></div>
+
+  <!-- SECTION: SCENARIO 2 -->
+  <div class="section-head">
+    <div class="section-num">02</div>
+    <div class="section-title">Scenario Two</div>
+    <div class="section-sub">10 minutes · 4 decision points</div>
+  </div>
+
+  <article class="scenario">
+    <div class="scenario-head">
+      <div class="scenario-stamp">Briefing · Job #4218</div>
+      <h1 class="scenario-title">The Bolt-Up They Skipped</h1>
+      <div class="scenario-meta">
+        <span><strong>Project</strong> Multi-prime, 4-story tech HQ</span>
+        <span><strong>Your role</strong> Detail crew foreman</span>
+        <span><strong>Time</strong> 7:18 AM, Friday</span>
+        <span><strong>Weather</strong> 64°F, clear</span>
+      </div>
+    </div>
+
+    <div class="scenario-body">
+      <p class="lead first">
+        You're running a detail crew — bolt-ups, plumb-and-align — on a 4-story tech HQ. There's
+        another ironworking sub on the job working a different scope, ahead of you on the
+        same floor sequence. They erected and bolted up the columns last week. Your crew is now
+        moving in to finish the connections behind them.
+      </p>
+
+      <p class="lead">
+        You walk the 4th floor at 7:18 AM doing your morning hazard check. At a column splice on
+        gridline C-7, you notice <strong>the inspection tag is missing</strong>. The bolts look
+        installed but they're sitting proud — not fully tensioned. You torque-check one with a
+        hand wrench and it turns. <strong>Way more than it should.</strong>
+      </p>
+
+      <p class="lead">
+        You ask one of their journeymen who walks by. He shrugs:
+      </p>
+
+      <em class="quote">
+        "The foreman said we were good. The inspector signed off Wednesday. Don't worry about it."
+      </em>
+
+      <p class="lead">
+        You can't find the inspection report. You text your super — no answer yet, he's
+        in a GC meeting. Your crew is staged, tools out, ready to start working off these
+        connections in <strong>30 minutes</strong>. The connection at C-7 is structural — it
+        ties into a transfer girder.
+      </p>
+
+      <div class="what-you-know">
+        <h4>What you know</h4>
+        <ul>
+          <li>Bolted connections require documented inspection per the project quality plan and AISC standards.</li>
+          <li>An untensioned slip-critical bolt in a transfer girder splice is a structural defect, not just a punch list item.</li>
+          <li>The other sub's foreman is senior to you — 25 years on, well-respected on this project.</li>
+          <li>If your crew sits idle, the GC will ask why. If you raise a flag and you're wrong, you've called out a senior foreman in front of everyone.</li>
+          <li>OSHA is the floor, not the ceiling. The project quality plan exceeds OSHA on inspections.</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <!-- DECISION POINTS 2 -->
+  <div class="decisions">
+    <div class="decisions-head">
+      <div class="icon">!</div>
+      <div>
+        <h3>Your call</h3>
+        <div class="sub">Solo first. Then argue it out as a group.</div>
+      </div>
+    </div>
+    <div class="decision-list">
+      <div class="decision-item">
+        <div class="decision-num">1</div>
+        <div class="decision-content">
+          <div class="decision-q">What is your immediate next move — in the next 60 seconds?</div>
+          <div class="decision-hint">
+            Before you call anyone. Before you talk to anyone. What is the very first thing you do
+            with your hands and your feet?
+          </div>
+        </div>
+      </div>
+
+      <div class="decision-item">
+        <div class="decision-num">2</div>
+        <div class="decision-content">
+          <div class="decision-q">Who do you call — and in what order?</div>
+          <div class="decision-hint">
+            Your super (still in the meeting). The GC. The third-party inspector. The other
+            sub's foreman. Order matters. Justify your sequence.
+          </div>
+        </div>
+      </div>
+
+      <div class="decision-item">
+        <div class="decision-num">3</div>
+        <div class="decision-content">
+          <div class="decision-q">Your crew is staged and ready. What do you do with them?</div>
+          <div class="decision-hint">
+            Start them on something else. Send them home. Hold them on the clock. Each call
+            costs the company differently — and signals something different to your crew.
+          </div>
+        </div>
+      </div>
+
+      <div class="decision-item">
+        <div class="decision-num">4</div>
+        <div class="decision-content">
+          <div class="decision-q">The other foreman calls you. He says you're "making him look bad." How do you respond — exact words?</div>
+          <div class="decision-hint">
+            Not a paragraph. The actual sentence. This is the moment most foremen get wrong.
+            You can be right and still wreck the working relationship. Or you can hold the
+            line without making an enemy.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW TO WORK IT -->
+  <div class="process">
+    <h4>How to work scenario two</h4>
+    <div class="process-grid">
+      <div class="process-cell">
+        <div class="label">Phase 1 · Solo</div>
+        <div class="what">Write your call</div>
+        <div class="time">3 minutes · no talking</div>
+      </div>
+      <div class="process-cell">
+        <div class="label">Phase 2 · Group</div>
+        <div class="what">Argue + agree</div>
+        <div class="time">5 minutes · one voice each</div>
+      </div>
+      <div class="process-cell">
+        <div class="label">Phase 3 · Submit</div>
+        <div class="what">One answer per group</div>
+        <div class="time">2 minutes</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBMIT 2 — IFRAME EMBED -->
+  <div class="submit-cta">
+    <div class="label">Form Submission · Scenario 2</div>
+    <h3>Submit your group's call</h3>
+    <p>Same group name as Scenario 1. Scroll down within the form to reach Scenario 2 questions.</p>
+    <div class="form-embed">
+      <!-- ============================================================== -->
+      <!-- SAME FORM AS ABOVE — paste the SAME embed URL here              -->
+      <!-- (Both buttons point to the same form; users scroll within it)   -->
+      <!-- ============================================================== -->
+      <iframe
+        src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=VqDS_LW1kkmjfyLfsKnmzfDUR4PIkO5DqxZrwTk6xSJUMFROSDJBTThFVVFQTFQxWkhZNVpCWFBIMC4u&embed=true"
+        frameborder="0"
+        marginwidth="0"
+        marginheight="0"
+        style="border: none; max-width: 100%; max-height: 100vh"
+        allowfullscreen
+        webkitallowfullscreen
+        mozallowfullscreen
+        msallowfullscreen>
+      </iframe>
+    </div>
+    <p class="embed-fallback">
+      Form not loading? <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=VqDS_LW1kkmjfyLfsKnmzfDUR4PIkO5DqxZrwTk6xSJUMFROSDJBTThFVVFQTFQxWkhZNVpCWFBIMC4u" target="_blank" rel="noopener">Open it in a new tab →</a>
+    </p>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <div class="label">When we come back together</div>
+    <div class="principle">
+      Safety isn't your highest priority — <span class="hl">it's a core value.</span><br>
+      A foreman protects everyone in their work area, <span class="hl">including the people who don't work for them.</span>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="foot">
+    <span>Sure Steel · Foreman Cohort · Module 01 / Session 01</span>
+    <span>Built for the field</span>
+  </div>
+
+</div>
+
+</body>
+</html>
